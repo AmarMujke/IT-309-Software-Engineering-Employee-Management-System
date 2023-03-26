@@ -8,8 +8,6 @@ public class ManagementApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ManagementApplication.class, args);
-		String test = "test";
-		String testingTestBranch = "Testing the test branch merge to master";
 	}
 
 }

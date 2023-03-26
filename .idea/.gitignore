@@ -6,3 +6,28 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# Maven target directory
+target/
+
+# IntelliJ IDEA project files
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Compiled class file
+*.class
+
+# Log files
+*.log
+
+# Maven build directory
+build/
+*.jar
+*.war
+*.ear
+
+# Gradle build directory
+.gradle/
+build/
