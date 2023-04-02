@@ -1,13 +1,15 @@
 package com.employee.management.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Employees")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Employees {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "name")
@@ -16,9 +18,8 @@ public class Employees {
     @Column(name = "job_title")
     private String jobTitle;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
+    @Column(name = "department_id")
+    private int departmentId;
 
     @Column(name = "email")
     private String email;
@@ -58,12 +59,12 @@ public class Employees {
         this.jobTitle = jobTitle;
     }
 
-    public Department getDepartment() {
-        return department;
+    public int getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
     }
 
     public String getEmail() {
