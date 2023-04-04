@@ -10,8 +10,8 @@ public class Attendance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "attendance_id")
-    private long id;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "employee_id" )
     private int employee_id;
@@ -27,11 +27,11 @@ public class Attendance {
     @Column(name = "status")
     private String status;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -11,8 +11,8 @@ public class Payroll {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payroll_id")
-    private long id;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "employee_id" )
     private int employee_id;
@@ -28,11 +28,11 @@ public class Payroll {
     @Column(name = "taxes")
     private double taxes;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

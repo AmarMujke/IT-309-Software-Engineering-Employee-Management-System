@@ -31,3 +31,6 @@ build/
 # Gradle build directory
 .gradle/
 build/
+
+# Application Properties
+/src/main/resources/application.properties
