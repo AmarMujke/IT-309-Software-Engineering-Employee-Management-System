@@ -1,11 +1,13 @@
 package com.employee.management.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 @Entity
 @Table(name = "attendance")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Attendance {
 
     @Id

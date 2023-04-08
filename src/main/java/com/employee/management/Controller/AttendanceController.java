@@ -1,4 +1,4 @@
-package com.employee.management.Controller;
+package com.employee.management.controller;
 
 import com.employee.management.Repository.AttendanceRepository;
 import com.employee.management.model.Attendance;
@@ -22,10 +22,6 @@ public class AttendanceController {
     public Attendance getAttendanceById(@PathVariable(value = "id") Long id){
         return attendanceRepository.getById(id);
      }
-  @GetMapping("/getAttendanceByEmployee/{employee_id}")
-   public List<Attendance> getAttendanceByEmployee(@PathVariable int employee_id){
-    return attendanceRepository.findByEmployeeId(employee_id);}
-
 
     @DeleteMapping("/deleteAttendance/{id}")
     public void deleteAttendance(@PathVariable(value = "id") Long id){
