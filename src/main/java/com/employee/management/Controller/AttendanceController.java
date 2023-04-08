@@ -1,6 +1,6 @@
 package com.employee.management.controller;
 
-import com.employee.management.Repository.AttendanceRepository;
+import com.employee.management.repo.AttendanceRepository;
 import com.employee.management.model.Attendance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
