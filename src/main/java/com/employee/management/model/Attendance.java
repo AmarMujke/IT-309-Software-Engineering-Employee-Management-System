@@ -1,17 +1,19 @@
 package com.employee.management.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 @Entity
 @Table(name = "attendance")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Attendance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "attendance_id")
-    private long id;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "employee_id" )
     private int employee_id;
@@ -27,11 +29,11 @@ public class Attendance {
     @Column(name = "status")
     private String status;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
