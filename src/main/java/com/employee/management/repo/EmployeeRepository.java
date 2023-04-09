@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface EmployeeRepo extends JpaRepository<Employees, Long> {
+public interface EmployeeRepository extends JpaRepository<Employees, Long> {
     List<Employees> findByDepartmentId(int departmentId);
 
 }

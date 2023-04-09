@@ -1,7 +1,7 @@
 package com.employee.management.controller;
 
 import com.employee.management.model.Employees;
-import com.employee.management.repo.EmployeeRepo;
+import com.employee.management.repo.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeController {
     @Autowired
-    private EmployeeRepo employeeRepository;
+    private EmployeeRepository employeeRepository;
 
     // Get all employees
     @GetMapping("/getEmployees")
