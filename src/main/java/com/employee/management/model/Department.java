@@ -1,28 +1,34 @@
 package com.employee.management.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Departments")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
     private String description;
 
-    private int managerId;
+    @Column(name = "manager")
+    private String  manager;
 
     public Department() {
     }
 
-    public Department(String name, String description, int managerId) {
+    public Department(String name, String description, String manager) {
         this.name = name;
         this.description = description;
-        this.managerId = managerId;
+        this.manager = manager;
     }
 
     public int getId() {
@@ -49,11 +55,11 @@ public class Department {
         this.description = description;
     }
 
-    public int getManagerId() {
-        return managerId;
+    public String getManager() {
+        return manager;
     }
 
-    public void setManagerId(int managerId) {
-        this.managerId = managerId;
+    public void setManager(String manager) {
+        this.manager = manager;
     }
 }
