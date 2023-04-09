@@ -2,7 +2,7 @@ package com.employee.management;
 
 import com.employee.management.controller.DepartmentController;
 import com.employee.management.model.Department;
-import com.employee.management.repo.DepartmentRepo;
+import com.employee.management.repo.DepartmentRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -27,7 +27,7 @@ public class DepartmentControllerTest {
     private DepartmentController departmentController;
 
     @Mock
-    private DepartmentRepo departmentRepo;
+    private DepartmentRepository departmentRepository;
 
     @Test
     public void testGetAllDepartments() {
@@ -45,7 +45,7 @@ public class DepartmentControllerTest {
         List<Department> departments = Arrays.asList(department1, department2);
 
         // mock the repository method to return the test data
-        when(departmentRepo.findAll()).thenReturn(departments);
+        when(departmentRepository.findAll()).thenReturn(departments);
 
         // call the controller method
         List<Department> result = departmentController.getAllDepartments();
@@ -64,7 +64,7 @@ public class DepartmentControllerTest {
         department.setManager("John Doe");
 
         // mock the repository method to return the test data
-        when(departmentRepo.findById(anyLong())).thenReturn(Optional.of(department));
+        when(departmentRepository.findById(anyLong())).thenReturn(Optional.of(department));
 
         // call the controller method
         Department result = departmentController.getDepartmentById(1L);
@@ -82,7 +82,7 @@ public class DepartmentControllerTest {
         department.setManager("John Doe");
 
         // mock the repository method to return the saved entity
-        when(departmentRepo.save(any())).thenReturn(department);
+        when(departmentRepository.save(any())).thenReturn(department);
 
         // call the controller method
         Department result = departmentController.createDepartment(department);

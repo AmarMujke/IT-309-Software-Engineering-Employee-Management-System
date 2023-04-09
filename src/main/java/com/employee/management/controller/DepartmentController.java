@@ -1,7 +1,7 @@
 package com.employee.management.controller;
 
 import com.employee.management.model.Department;
-import com.employee.management.repo.DepartmentRepo;
+import com.employee.management.repo.DepartmentRepository;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +13,16 @@ import java.util.List;
 @RequestMapping("/department")
 public class DepartmentController {
     @Autowired
-    private DepartmentRepo departmentRepo;
+    private DepartmentRepository departmentRepository;
 
     @GetMapping("/getAll")
     public List<Department> getAllDepartments() {
-        return departmentRepo.findAll();
+        return departmentRepository.findAll();
     }
 
     @GetMapping("/getById/{id}")
     public Department getDepartmentById(@PathVariable Long id) {
-        return departmentRepo.findById(id)
+        return departmentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Department not found with id " + id));
     }
 
@@ -38,23 +38,23 @@ public class DepartmentController {
         if(department.getManager() != null) {
             newDepartment.setManager(department.getManager());
         }
-        return departmentRepo.save(newDepartment);
+        return departmentRepository.save(newDepartment);
     }
 
     @PutMapping("/updateDepartment/{id}")
     public Department updateDepartment(@PathVariable Long id, @RequestBody Department departmentDetails) {
-        Department department = departmentRepo.findById(id)
+        Department department = departmentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Department not found with id " + id));
         department.setName(departmentDetails.getName());
         department.setDescription(departmentDetails.getDescription());
-        return departmentRepo.save(department);
+        return departmentRepository.save(department);
     }
 
     @DeleteMapping("deleteDepartment/{id}")
     public ResponseEntity<?> deleteDepartment(@PathVariable Long id) {
-        Department department = departmentRepo.findById(id)
+        Department department = departmentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Department not found with id " + id));
-        departmentRepo.delete(department);
+        departmentRepository.delete(department);
         return ResponseEntity.ok().build();
     }
 }
