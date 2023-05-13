@@ -1,0 +1,12 @@
+html, body, .document {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #FDFDFB;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

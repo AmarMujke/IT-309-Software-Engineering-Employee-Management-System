@@ -2,7 +2,7 @@ package com.employee.management;
 
 import com.employee.management.controller.EmployeeController;
 import com.employee.management.model.Employees;
-import com.employee.management.repo.EmployeeRepo;
+import com.employee.management.repo.EmployeeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -25,7 +25,7 @@ public class EmployeeControllerTest {
     private EmployeeController employeeController;
 
     @Mock
-    private EmployeeRepo employeeRepo;
+    private EmployeeRepository employeeRepository;
 
     @Test
     public void testGetAllEmployees() {
@@ -51,7 +51,7 @@ public class EmployeeControllerTest {
         List<Employees> employees = Arrays.asList(employee1, employee2);
 
         // mock the repository method to return the test data
-        when(employeeRepo.findAll()).thenReturn(employees);
+        when(employeeRepository.findAll()).thenReturn(employees);
 
         // call the controller method
         List<Employees> result = employeeController.getAllEmployees();
@@ -73,7 +73,7 @@ public class EmployeeControllerTest {
         employee.setSalary(80000.00);
 
         // mock the repository method to return the saved entity
-        when(employeeRepo.save(any())).thenReturn(employee);
+        when(employeeRepository.save(any())).thenReturn(employee);
 
         // call the controller method
         Employees result = employeeController.createEmployee(employee);

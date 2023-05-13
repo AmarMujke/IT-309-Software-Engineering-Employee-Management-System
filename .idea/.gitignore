@@ -33,7 +33,4 @@ build/
 build/
 
 # Application Properties
-../src/main/resources/application.properties
-
-# misc
-/misc.xml
+/src/main/resources/application.properties
