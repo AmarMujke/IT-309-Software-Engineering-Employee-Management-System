@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Login</title>
-    <link rel="stylesheet" href="css/loginregister.css">
+    <link rel="stylesheet" href="../css/loginregister.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -83,7 +83,7 @@ switchers.forEach(item => {
       var admin = employee.admin;
 
       var loginXhr = new XMLHttpRequest();
-      loginXhr.open('POST', 'http://localhost:8080/employee/login');
+      loginXhr.open('POST', 'http://165.227.169.215:8080/employee/login');
       loginXhr.setRequestHeader('Content-Type', 'application/json');
       loginXhr.onload = function() {
         if (loginXhr.status === 200) {
@@ -99,7 +99,7 @@ switchers.forEach(item => {
           };
 
           var addAttendanceXhr = new XMLHttpRequest();
-          addAttendanceXhr.open('POST', 'http://localhost:8080/attendance/addAttendance');
+          addAttendanceXhr.open('POST', 'http://165.227.169.215:8080/attendance/addAttendance');
           addAttendanceXhr.setRequestHeader('Content-Type', 'application/json');
           addAttendanceXhr.onload = function() {
             if (addAttendanceXhr.status === 200) {
