@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `employee`.`Departments` (
   `manager` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `employee`.`Employees` (
   `phone_number` VARCHAR(255) NOT NULL,
   `hire_date` DATE NOT NULL,
   `salary` DECIMAL(10,2) NOT NULL,
+  `admin` TINYINT(1) NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   INDEX `fk_department_id` (`department_id` ASC) VISIBLE,
   CONSTRAINT `employees_ibfk_1`
@@ -53,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `employee`.`Employees` (
     FOREIGN KEY (`department_id`)
     REFERENCES `employee`.`Departments` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 6
+AUTO_INCREMENT = 21
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -66,15 +67,15 @@ CREATE TABLE IF NOT EXISTS `employee`.`Attendance` (
   `employee_id` INT NOT NULL,
   `date` DATE NOT NULL,
   `time_in` TIME NOT NULL,
-  `time_out` TIME NOT NULL,
-  `status` VARCHAR(255) NOT NULL,
+  `time_out` TIME NULL DEFAULT NULL,
+  `status` VARCHAR(255) NULL DEFAULT 'green',
   PRIMARY KEY (`id`),
   INDEX `employee_id` (`employee_id` ASC) VISIBLE,
   CONSTRAINT `attendance_ibfk_1`
     FOREIGN KEY (`employee_id`)
     REFERENCES `employee`.`Employees` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
+AUTO_INCREMENT = 31
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -96,6 +97,21 @@ CREATE TABLE IF NOT EXISTS `employee`.`Payroll` (
     REFERENCES `employee`.`Employees` (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `employee`.`employee_passwords`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `employee`.`employee_passwords` (
+  `employee_id` INT NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`employee_id`),
+  CONSTRAINT `fk_employee_id`
+    FOREIGN KEY (`employee_id`)
+    REFERENCES `employee`.`Employees` (`id`))
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
