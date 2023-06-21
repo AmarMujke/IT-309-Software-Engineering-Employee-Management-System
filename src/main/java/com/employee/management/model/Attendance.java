@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 @Entity
-@Table(name = "attendance")
+@Table(name = "Attendance")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Attendance {
 
@@ -16,7 +16,7 @@ public class Attendance {
     private Long id;
 
     @Column(name = "employee_id" )
-    private int employee_id;
+    private Long employee_id;
 
     @Column(name = "date" )
     private LocalDate date;
@@ -37,11 +37,11 @@ public class Attendance {
         this.id = id;
     }
 
-    public int getEmployee_id() {
+    public Long getEmployee_id() {
         return employee_id;
     }
 
-    public void setEmployee_id(int employee_id) {
+    public void setEmployee_id(Long employee_id) {
         this.employee_id = employee_id;
     }
 

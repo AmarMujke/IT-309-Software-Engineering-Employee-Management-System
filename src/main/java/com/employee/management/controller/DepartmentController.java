@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/department")
 public class DepartmentController {
@@ -47,6 +48,7 @@ public class DepartmentController {
                 .orElseThrow(() -> new ResourceNotFoundException("Department not found with id " + id));
         department.setName(departmentDetails.getName());
         department.setDescription(departmentDetails.getDescription());
+        department.setManager(departmentDetails.getManager());
         return departmentRepository.save(department);
     }
 

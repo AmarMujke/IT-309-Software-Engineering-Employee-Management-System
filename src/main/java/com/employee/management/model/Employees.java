@@ -33,8 +33,18 @@ public class Employees {
     @Column(name = "salary")
     private Double salary;
 
+    @Column(name = "admin")
+    private Boolean admin;
+
     // getters and setters
 
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
     public Long getId() {
         return id;
     }
