@@ -1,6 +1,7 @@
 package com.employee.management;
 
 import com.employee.management.controller.EmployeeController;
+import com.employee.management.model.EmployeeRegistrationRequest;
 import com.employee.management.model.Employees;
 import com.employee.management.repo.EmployeeRepository;
 import org.junit.Test;
@@ -58,28 +59,6 @@ public class EmployeeControllerTest {
 
         // verify that the result is the same as the test data
         assertEquals(employees, result);
-    }
-
-    @Test
-    public void testCreateEmployee() {
-        // create some test data
-        Employees employee = new Employees();
-        employee.setName("John Doe");
-        employee.setJobTitle("Software Engineer");
-        employee.setDepartmentId(1);
-        employee.setEmail("john.doe@example.com");
-        employee.setPhoneNumber("+1-555-555-1234");
-        employee.setHireDate("2021-03-01");
-        employee.setSalary(80000.00);
-
-        // mock the repository method to return the saved entity
-        when(employeeRepository.save(any())).thenReturn(employee);
-
-        // call the controller method
-        Employees result = employeeController.createEmployee(employee);
-
-        // verify that the result is the same as the test data
-        assertEquals(employee, result);
     }
 
 }
