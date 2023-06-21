@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Login</title>
+    <link rel="stylesheet" href="css/loginregister.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<section class="forms-section">
+  <h1 class="section-title">Animated Forms</h1>
+  <div class="forms">
+    <div class="form-wrapper is-active">
+      <button type="button" class="switcher switcher-login">
+        Login
+        <span class="underline"></span>
+      </button>
+      <form class="form form-login" id = "login-form" action="/login" method="POST">
+        <fieldset>
+          <legend>Please, enter your email and password for login.</legend>
+          <div class="input-block">
+            <label for="login-email">E-mail</label>
+            <input id="login-email" type="email" required>
+          </div>
+          <div class="input-block">
+            <label for="login-password">Password</label>
+            <input id="login-password" type="password" required>
+          </div>
+        </fieldset>
+        <button type="submit" class="btn-login">Login</button>
+      </form>
+    </div>
+    <div class="form-wrapper">
+      <button type="button" class="switcher switcher-signup">
+        PASSWORD RESET
+        <span class="underline"></span>
+      </button>
+      <form class="form form-signup">
+        <fieldset>
+          <legend>Contact us for password reset :)</legend>
+          <div class="input-block">
+            <label for="signup-email">E-mail</label>
+            <input id="signup-email" type="email" required>
+          </div>
+          <p>Contact us for password reset :)</p>
+        </fieldset>
+        <button type="submit" class="btn-signup" onclick="location.href='mailto:recipient@example.com';">Send</button>
+      </form>
+    </div>
+  </div>
+</section>
+<script>
+  
+  const switchers = [...document.querySelectorAll('.switcher')]
+
+switchers.forEach(item => {
+	item.addEventListener('click', function() {
+		switchers.forEach(item => item.parentElement.classList.remove('is-active'))
+		this.parentElement.classList.add('is-active')
+	})
+})
+
+
+  document.querySelector('#login-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  var email = document.getElementById('login-email').value;
+  var password = document.getElementById('login-password').value;
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'http://localhost:8080/employee/searchEmail');
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      var employee = JSON.parse(xhr.responseText);
+      var employeeId = employee.id;
+      var admin = employee.admin;
+
+      var loginXhr = new XMLHttpRequest();
+      loginXhr.open('POST', 'http://localhost:8080/employee/login');
+      loginXhr.setRequestHeader('Content-Type', 'application/json');
+      loginXhr.onload = function() {
+        if (loginXhr.status === 200) {
+          document.cookie = 'employeeId=' + employeeId;
+
+          // Create a new attendance record
+          var newAttendance = {
+            employee_id: employeeId,
+            date: new Date().toISOString().slice(0, 10),
+            time_in: new Date().toISOString().slice(11, 19),
+            time_out: '00:00:00',
+            status: ''
+          };
+
+          var addAttendanceXhr = new XMLHttpRequest();
+          addAttendanceXhr.open('POST', 'http://localhost:8080/attendance/addAttendance');
+          addAttendanceXhr.setRequestHeader('Content-Type', 'application/json');
+          addAttendanceXhr.onload = function() {
+            if (addAttendanceXhr.status === 200) {
+              if (admin) {
+                window.location.href = '/index.html';
+              } else {
+                window.location.href = '/indexNonAdmin.html';
+              }
+            } else {
+              console.error('Error:', addAttendanceXhr.status);
+            }
+          };
+          addAttendanceXhr.send(JSON.stringify(newAttendance));
+        } else if (loginXhr.status === 401) {
+          alert('Invalid email or password');
+        } else {
+          console.error('Error:', loginXhr.status);
+        }
+      };
+
+      var loginData = {
+        email: email,
+        password: password
+      };
+
+      loginXhr.send(JSON.stringify(loginData));
+    } else if (xhr.status === 404) {
+      alert('Email not found');
+    } else {
+      console.error('Error:', xhr.status);
+    }
+  };
+
+  var searchData = {
+    email: email
+  };
+
+  xhr.send(JSON.stringify(searchData));
+});
+
+</script>
+</html>
