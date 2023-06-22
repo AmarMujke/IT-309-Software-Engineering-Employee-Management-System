@@ -50,7 +50,7 @@
           </div>
           <p>Contact us for password reset :)</p>
         </fieldset>
-        <button type="submit" class="btn-signup" onclick="location.href='mailto:recipient@example.com';">Send</button>
+        <button type="submit" class="btn-signup" onclick="location.href='mailto:amar.mujkic1@stu.ibu.edu.ba';">Send</button>
       </form>
     </div>
   </div>
@@ -74,7 +74,7 @@ switchers.forEach(item => {
   var password = document.getElementById('login-password').value;
 
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://165.227.169.215:8080/employee/searchEmail');
+  xhr.open('POST', 'http://localhost:8080/employee/searchEmail');
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function() {
     if (xhr.status === 200) {
@@ -83,7 +83,7 @@ switchers.forEach(item => {
       var admin = employee.admin;
 
       var loginXhr = new XMLHttpRequest();
-      loginXhr.open('POST', 'http://165.227.169.215:8080/employee/login');
+      loginXhr.open('POST', 'http://localhost:8080/employee/login');
       loginXhr.setRequestHeader('Content-Type', 'application/json');
       loginXhr.onload = function() {
         if (loginXhr.status === 200) {
@@ -99,14 +99,14 @@ switchers.forEach(item => {
           };
 
           var addAttendanceXhr = new XMLHttpRequest();
-          addAttendanceXhr.open('POST', 'http://165.227.169.215:8080/attendance/addAttendance');
+          addAttendanceXhr.open('POST', 'http://localhost:8080/attendance/addAttendance');
           addAttendanceXhr.setRequestHeader('Content-Type', 'application/json');
           addAttendanceXhr.onload = function() {
             if (addAttendanceXhr.status === 200) {
               if (admin) {
-                window.location.href = '/index.html';
+                window.location.href = 'index.html';
               } else {
-                window.location.href = '/indexNonAdmin.html';
+                window.location.href = 'indexNonAdmin.html';
               }
             } else {
               console.error('Error:', addAttendanceXhr.status);
