@@ -92,7 +92,7 @@
     };
 
     // Send the department data to the server using Ajax
-    fetch('http://localhost:8080/department/create', {
+    fetch('http://165.227.169.215:8080/department/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -112,7 +112,7 @@
 
   // Function to handle department deletion
   const deleteDepartment = () => {
-    fetch('http://localhost:8080/department/deleteDepartment/departmentId', {
+    fetch('http://165.227.169.215:8080/department/deleteDepartment/departmentId', {
       method: 'DELETE'
     })
       .then(response => {
@@ -142,7 +142,7 @@ document.getElementById('logout-link').addEventListener('click', function(event)
   var employeeId = getCookie('employeeId');
 
   var xhr = new XMLHttpRequest();
-  xhr.open('PUT', `http://localhost:8080/attendance/updateTimeOut/${employeeId}`);
+  xhr.open('PUT', `http://165.227.169.215:8080/attendance/updateTimeOut/${employeeId}`);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function() {
     if (xhr.status === 200) {

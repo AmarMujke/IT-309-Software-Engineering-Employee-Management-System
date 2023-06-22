@@ -80,7 +80,7 @@
 <script>
   // Fetch attendance data from the server and populate the table
   function fetchAttendanceData() {
-    fetch('http://localhost:8080/attendance/getAll')
+    fetch('http://165.227.169.215:8080/attendance/getAll')
       .then(response => response.json())
       .then(attendanceData => {
         const tableBody = document.getElementById('attendance-table-body');
@@ -112,7 +112,7 @@ console.log(attendanceData)
     const searchValue = searchInput.value.trim();
 
     // Fetch attendance data from the server and filter based on employee ID
-    fetch('http://localhost:8080/attendance/getAll')
+    fetch('http://165.227.169.215:8080/attendance/getAll')
       .then(response => response.json())
       .then(attendanceData => {
         const filteredData = attendanceData.filter(attendance => {
@@ -151,7 +151,7 @@ document.getElementById('logout-link').addEventListener('click', function(event)
   var employeeId = getCookie('employeeId');
 
   var xhr = new XMLHttpRequest();
-  xhr.open('PUT', `http://localhost:8080/attendance/updateTimeOut/${employeeId}`);
+  xhr.open('PUT', `http://165.227.169.215:8080/attendance/updateTimeOut/${employeeId}`);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function() {
     if (xhr.status === 200) {
@@ -185,7 +185,7 @@ function updateStatus(newStatus) {
 
   // Make AJAX call to update attendance status
   var xhr = new XMLHttpRequest();
-  xhr.open('PUT', 'http://localhost:8080/attendance/updateStatus/' + employeeId);
+  xhr.open('PUT', 'http://165.227.169.215:8080/attendance/updateStatus/' + employeeId);
   xhr.setRequestHeader('Content-Type', 'text/plain');
   xhr.onload = function() {
     if (xhr.status === 200) {

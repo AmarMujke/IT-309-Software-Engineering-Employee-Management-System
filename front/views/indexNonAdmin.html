@@ -89,7 +89,7 @@ $(document).ready(function() {
   const employeeId = getCookie('employeeId');
 
   // Fetch attendance data for the logged-in user and populate the table
-  $.get(`http://localhost:8080/attendance/getByEmployeeId/${employeeId}`, function(attendanceData) {
+  $.get(`http://165.227.169.215:8080/attendance/getByEmployeeId/${employeeId}`, function(attendanceData) {
     const tableBody = $('#attendance-table-body');
     tableBody.empty(); // Clear existing table rows
 
@@ -121,7 +121,7 @@ function updateStatus(newStatus) {
 
   // Make AJAX call to update attendance status
   var xhr = new XMLHttpRequest();
-  xhr.open('PUT', 'http://localhost:8080/attendance/updateStatus/' + employeeId);
+  xhr.open('PUT', 'http://165.227.169.215:8080/attendance/updateStatus/' + employeeId);
   xhr.setRequestHeader('Content-Type', 'text/plain');
   xhr.onload = function() {
     if (xhr.status === 200) {
@@ -141,7 +141,7 @@ document.querySelector('header.main-head a[href="login.html"]').addEventListener
 
   // Make AJAX call to update attendance time_out
   var xhr = new XMLHttpRequest();
-  xhr.open('PUT', 'http://localhost:8080/attendance/updateTimeOut/' + employeeId);
+  xhr.open('PUT', 'http://165.227.169.215:8080/attendance/updateTimeOut/' + employeeId);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function() {
     if (xhr.status === 200) {
@@ -161,7 +161,7 @@ document.getElementById('logout-link').addEventListener('click', function(event)
   var employeeId = getCookie('employeeId');
 
   var xhr = new XMLHttpRequest();
-  xhr.open('PUT', `http://localhost:8080/attendance/updateTimeOut/${employeeId}`);
+  xhr.open('PUT', `http://165.227.169.215:8080/attendance/updateTimeOut/${employeeId}`);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function() {
     if (xhr.status === 200) {
