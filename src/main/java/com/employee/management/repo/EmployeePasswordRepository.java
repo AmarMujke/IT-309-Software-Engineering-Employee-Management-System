@@ -14,5 +14,8 @@ public interface EmployeePasswordRepository extends JpaRepository<EmployeePasswo
     @Query(value = "INSERT INTO employee_passwords (employee_id, password) VALUES (:employeeId, :password)", nativeQuery = true)
     void savePassword(@Param("employeeId") Long employeeId, @Param("password") String password);
 
+    @Modifying
+    @Query(value = "DELETE FROM employee_passwords WHERE employee_id = :employeeId", nativeQuery = true)
+    void deleteByEmployeeId(@Param("employeeId") Long employeeId);
 
 }

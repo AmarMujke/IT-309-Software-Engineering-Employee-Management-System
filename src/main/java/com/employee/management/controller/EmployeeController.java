@@ -1,10 +1,11 @@
 package com.employee.management.controller;
 
-import com.employee.management.model.EmployeePasswords;
 import com.employee.management.model.EmployeeRegistrationRequest;
 import com.employee.management.model.Employees;
 import com.employee.management.repo.EmployeePasswordRepository;
 import com.employee.management.repo.EmployeeRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
+
+    @PersistenceContext
+    private EntityManager entityManager;
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -35,7 +39,27 @@ public class EmployeeController {
     public Employees getEmployeeById(@PathVariable(value = "id") Long employeeId) {
         return employeeRepository.getById(employeeId);
     }
+    @DeleteMapping("/deleteEmployee/{id}")
+    @Transactional
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") Long employeeId) {
+        try {
+            // Delete employee's password first
+            deleteEmployeePassword(employeeId);
 
+            // Delete the employee
+            employeeRepository.deleteById(employeeId);
+
+            return ResponseEntity.ok("Employee deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete employee");
+        }
+    }
+
+    private void deleteEmployeePassword(Long employeeId) {
+        entityManager.createNativeQuery("DELETE FROM employee_passwords WHERE employee_id = :employeeId")
+                .setParameter("employeeId", employeeId)
+                .executeUpdate();
+    }
     // Search employee
     @PostMapping("/search")
     public ResponseEntity<?> searchEmployeeByName(@RequestBody Map<String, String> request) {
@@ -110,13 +134,6 @@ public class EmployeeController {
         }
 
         return employeeRepository.save(existingEmployee);
-    }
-
-    // Delete employee
-    @DeleteMapping("deleteEmployee/{id}")
-    public void deleteEmployee(@PathVariable(value = "id") Long employeeId) {
-        Employees employee = employeeRepository.getById(employeeId);
-        employeeRepository.delete(employee);
     }
 
     // Get employees by department id
