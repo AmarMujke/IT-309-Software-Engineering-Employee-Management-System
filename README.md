@@ -1,6 +1,14 @@
 # IT-309-Software-Engineering-Employee-Management-System
 Course project.
 
+Final deploy is at http://165.227.169.215/views/login.html
+#### IMPORTANT ####
+To use the app you can use these credentials:
+- With Admin Rights: janesmith@example.com, password2;
+- Without Admin Rights: amarmujkic@example.com, pass1;
+#### END OF IMPORTANT ####
+
+
 ** Our first release is finsihed API, we will probably add more methods and functionalities as we further discover that we need them.
 ** Our first release is deployed at:
 
